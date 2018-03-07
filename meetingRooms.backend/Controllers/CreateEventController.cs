@@ -5,16 +5,17 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Exchange.WebServices.Data;
 using meetingRooms.backend.Models;
+using meetingRooms.backend.Services;
 
 namespace meetingRooms.backend.Controllers
 {
     public class CreateEventController : ApiController
     {
-        private ExchangeService service;
+        private ExchangeService _service;
 
-        public CreateEventController()
+        public CreateEventController(IExchangeSharedService serviceGetter)
         {
-            service = new Services.ExchageSharedService().GetExchange();
+            _service = serviceGetter.GetExchange();
         }
         /// <summary>
         /// Создает событие в календаре от лица test@sibedge.com в любой передаваемый email переговорки
@@ -34,10 +35,11 @@ namespace meetingRooms.backend.Controllers
             DateTime timeEnd = DateTime.Parse(startTime).AddMinutes(duration);
 
             // Cоздание самого события
-            var appointment = new Appointment(service)
+            var appointment = new Appointment(_service)
             {
-                Subject = UsersDataSource.getUsers().FirstOrDefault(user => user.Id == id).Surname, // изменить позже
-                Body = eventName,
+                Subject = eventName, // изменить позже
+                Body = UsersDataSource.getUsers().FirstOrDefault(user => user.Id == id).Surname,
+                Location = eventName + " " + UsersDataSource.getUsers().FirstOrDefault(user => user.Id == id).Surname,
                 Start = timeStart,
                 End = timeEnd
             };

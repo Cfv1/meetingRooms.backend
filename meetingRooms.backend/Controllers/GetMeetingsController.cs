@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Exchange.WebServices.Data;
 using meetingRooms.backend.Models;
+using meetingRooms.backend.Services;
 
 namespace meetingRooms.backend.Controllers
 {
@@ -17,11 +18,11 @@ namespace meetingRooms.backend.Controllers
             new MeetingRoom { Email = "small-meeting-room@sibedge.com", Name = "Малая переговорка"}
         };
 
-        private ExchangeService service;
+        private ExchangeService _service;
 
-        public GetMeetingsController()
+        public GetMeetingsController(IExchangeSharedService serviceGetter)
         {
-            service = new Services.ExchageSharedService().GetExchange();
+            _service = serviceGetter.GetExchange();
         }
         /// <summary>
         /// 
@@ -44,7 +45,7 @@ namespace meetingRooms.backend.Controllers
             DateTime startDate = DateTime.Today;
             CalendarView cView = new CalendarView(startDate, startDate.AddDays(1), 200); //Set date
 
-            FindItemsResults<Item> appointments = service.FindItems(folderIdFromCalendar, cView); //Get Appointments by room
+            FindItemsResults<Item> appointments = _service.FindItems(folderIdFromCalendar, cView); //Get Appointments by room
             List<Meeting> meetings = new List<Meeting>();
             foreach(Appointment appointment in appointments)
                 meetings.Add(new Meeting()

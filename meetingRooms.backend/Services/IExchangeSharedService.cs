@@ -6,7 +6,7 @@ using Microsoft.Exchange.WebServices.Data;
 
 namespace meetingRooms.backend.Services
 {
-    public interface IExchangeService
+    public interface IExchangeSharedService
     {
         ExchangeService GetExchange();
     }

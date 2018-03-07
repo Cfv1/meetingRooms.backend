@@ -21,7 +21,7 @@ namespace meetingRooms.backend.Controllers
 
         public GetMeetingsController()
         {
-            service = new Services.ExchageService().GetExchange();
+            service = new Services.ExchageSharedService().GetExchange();
         }
         /// <summary>
         /// 

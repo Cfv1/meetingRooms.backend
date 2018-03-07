@@ -14,7 +14,7 @@ namespace meetingRooms.backend.Controllers
 
         public CreateEventController()
         {
-            service = new Services.ExchageService().GetExchange();
+            service = new Services.ExchageSharedService().GetExchange();
         }
         /// <summary>
         /// Создает событие в календаре от лица test@sibedge.com в любой передаваемый email переговорки

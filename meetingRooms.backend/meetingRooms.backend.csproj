@@ -125,8 +125,8 @@
     <Compile Include="Models\UsersDataSource.cs" />
     <Compile Include="PrivateVariables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ExchageService.cs" />
-    <Compile Include="Services\IExchangeService.cs" />
+    <Compile Include="Services\ExchageSharedService.cs" />
+    <Compile Include="Services\IExchangeSharedService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

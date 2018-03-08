@@ -7,12 +7,8 @@ namespace meetingRooms.backend.Models
 {
     public class Meeting
     {
-        public int Id { get; set; }
-
         public String Subject { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
-
-        public int RoomId { get; set; }
     }
 }

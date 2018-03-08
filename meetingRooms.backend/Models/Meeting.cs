@@ -12,5 +12,7 @@ namespace meetingRooms.backend.Models
         public String Subject { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
+
+        public int RoomId { get; set; }
     }
 }

@@ -6,6 +6,9 @@ using meetingRooms.backend.Services;
 using Unity;
 using ProductStore.Resolver;
 using Unity.Lifetime;
+using System.Collections;
+using meetingRooms.backend.Models;
+using Unity.Injection;
 
 namespace meetingRooms.backend
 {
@@ -16,13 +19,15 @@ namespace meetingRooms.backend
             // Конфигурация и службы веб-API
             var container = new UnityContainer();
             container.RegisterType<IExchangeSharedService, ExchageSharedService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IList<MeetingRoom>, List<MeetingRoom>>(new HierarchicalLifetimeManager());
+
             config.DependencyResolver = new UnityResolver(container);
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{id}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
